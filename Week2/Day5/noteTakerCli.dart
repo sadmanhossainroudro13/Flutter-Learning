@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:convert';
-
 void main() async {
   print("Enter File Content:");
   String? readFile = stdin.readLineSync();

@@ -23,5 +23,5 @@ void main() {
     return (a['price'] as int) > (b['price'] as int) ? a : b;
   });
 
-  print("highest Price: ${highestPrice['category']} - ${highestPrice['price']}");
+  print("highest Price: ${highestPrice['name']} - ${highestPrice['price']}");
 }
