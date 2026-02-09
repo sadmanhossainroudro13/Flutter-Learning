@@ -18,6 +18,8 @@ class FileDatabase<T> {
   late File file;
 
   FileDatabase(this.filename) {
+    file = File(filename);
+
     if (!file.existsSync()) {
       file.createSync();
       file.writeAsStringSync('[]');
@@ -26,38 +28,36 @@ class FileDatabase<T> {
   }
 
   //Add korete hobe save e jate same id r duplicate na hoy
-  void save(Student newStudent) {
+  void save(T item) {
     //Reading the file
     String fileInfo = file.readAsStringSync();
+
+    if (fileInfo.isEmpty) fileInfo = '[]';
 
     //Decoding the file to List
     List<dynamic> listFile = jsonDecode(fileInfo);
 
-    //Adding the new student info to the List
-    listFile.add(newStudent.toJson());
+    var itemjson = (item as dynamic).toJson();
 
-    //Now encoding the file for saving
-    String encodeData = jsonEncode(listFile);
 
-    //Saving the info to file
-    file.writeAsStringSync(encodeData);
-    print("Successfully Added new student....");
+    bool isDuplicate = listFile.any(
+      (element) => element['ID'] == itemjson['ID'],
+    );
+
+    if (isDuplicate) {
+      print("Error!! ID: ${itemjson['ID']} already exists");
+    } else {
+      listFile.add(itemjson);
+      file.writeAsString(jsonEncode(listFile));
+      print("Added successfully to $filename");
+    }
   }
 
-  void getAll() {
+  List<dynamic> getAll() {
     //Reading the file
     String fileInfo = file.readAsStringSync();
 
-    //Decode the file Information to map
-    List<dynamic> lst = jsonDecode(fileInfo);
-
-    print("---Student Information---");
-    for (var map in lst) {
-      print("Name: ${map["Name"]}");
-      print("ID: ${map["ID"]}");
-      print("CGPA: ${map["CGPA"]}");
-      print("---------------------");
-    }
+    return jsonDecode(fileInfo);
   }
 
   void delete(int id) {
@@ -82,10 +82,14 @@ class FileDatabase<T> {
 void main() {
   Student stu1 = Student(221155641, "Sadman Hossain", 3.5);
   Student stu2 = Student(221155549, "Forhadul Islam", 3.3);
-  // Student stu2 = Student(221155641, "Sadman Hossain", 3.5);
-  // Student stu3 = Student(221155641, "Sadman Hossain", 3.5);
-  FileDatabase<Student> db = FileDatabase();
-  //db.save(stu2);
-  db.delete(221155641);
-  db.getAll();
+  
+  FileDatabase<Student> db = FileDatabase('student.json');
+  
+  db.save(stu1);
+  db.save(stu2);
+
+  List<dynamic> data = db.getAll();
+  for (var map in data) {
+    print(map);
+  }
 }

@@ -1,4 +1,4 @@
-Future<String> downloadFile() async {
+Future<String> downloadFiles() async {
   print("Doenload has Started.....");
 
   await Future.delayed(Duration(seconds: 3));
@@ -9,7 +9,7 @@ Future<String> downloadFile() async {
 void main() async {
   print("App has Started...");
 
-  String file = await downloadFile();
+  String file = await downloadFiles();
 
   print("Download has completed : $file");
   print("App Closed");
