@@ -49,9 +49,9 @@ void main() async {
 
       sub1.cancel();
       sub2.cancel();
-      
+
       print("Exiting Program");
-      
+
       exit(0);
     }
   });
@@ -60,6 +60,7 @@ void main() async {
   await sub1.asFuture();
 
   print('\n--- ✅ Stream Finished. Reading File ---');
+
   if (await myFile.exists()) {
     String content = await myFile.readAsString();
     if (content.isEmpty) {
@@ -73,4 +74,5 @@ void main() async {
 
   //Now removing all information from high price
   myFile.delete();
+  exit(0);
 }
