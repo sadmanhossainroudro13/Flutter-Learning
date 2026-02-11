@@ -6,7 +6,6 @@ void recurtionLimit(int limit) {
     print("Error!! Limit is: $limit");
   }
 }
-
 void main() {
   int limit = 0;
   recurtionLimit(limit);
