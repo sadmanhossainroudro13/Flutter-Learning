@@ -1,0 +1,2 @@
+Day 7:
+Practicing the Abstract class and How to combine the Dependency Injection with abstract class. So that dont need to change the code to modify system. First practiced Abstract class then practice the Dependency injection with abstract class. This is Week 4 , Day 7.
