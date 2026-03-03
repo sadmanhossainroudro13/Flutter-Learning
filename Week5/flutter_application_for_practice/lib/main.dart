@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_for_practice/MediaQueryPractice2.dart';
+import 'package:flutter_application_for_practice/micro_interactions.dart';
 import 'package:flutter_application_for_practice/portfolioPage.dart';
 
 void main() {
@@ -12,8 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'MyCustomFont'),
       debugShowCheckedModeBanner: false,
-      home: ScreenPractice(),
+      home: DeletePractice(),
     );
   }
 }
